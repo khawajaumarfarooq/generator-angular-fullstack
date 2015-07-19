@@ -3,9 +3,8 @@
 var express = require('express');
 var controller = require('./<%= name %>.controller');
 
-var router = express.Router();
+var router = express.Router();<% if(filters.mongoose) { %>
 
-router.get('/', controller.index);<% if(filters.mongoose) { %>
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

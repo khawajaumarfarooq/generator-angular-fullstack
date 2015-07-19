@@ -26,10 +26,11 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "yeoman-generator": "~0.17.0",
     "chalk": "~0.4.0",
+    "generator-ng-component": "~0.0.4",
+    "pluralize": "^1.1.2",
     "wiredep": "~0.4.2",
-    "generator-ng-component": "~0.0.4"
+    "yeoman-generator": "~0.17.0"
   },
   "peerDependencies": {
     "yo": ">=1.2.0"

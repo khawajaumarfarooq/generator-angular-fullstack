@@ -2,6 +2,7 @@
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var util = require('util');
+var pluralize = require('pluralize');
 var ngUtil = require('../util');
 var ScriptBase = require('../script-base.js');
 
@@ -22,7 +23,7 @@ Generator.prototype.askFor = function askFor() {
 
   // pluralization defaults to true for backwards compat
   if (this.config.get('pluralizeRoutes') !== false) {
-    name = name + 's';
+    name = pluralize(name);
   }
 
   var prompts = [
@@ -70,7 +71,17 @@ Generator.prototype.registerEndpoint = function registerEndpoint() {
 };
 
 Generator.prototype.createFiles = function createFiles() {
-  var dest = this.config.get('endpointDirectory') || 'server/api/' + this.name;
-  this.sourceRoot(path.join(__dirname, './templates'));
+  var dest;
+
+  this.name = pluralize(this.name, 1);
+
+  dest = this.config.get('endpointDirectory') || 'server/api/' + this.name;
+  this.sourceRoot(path.join(__dirname, './templates/name'));
+  ngUtil.processDirectory(this, '.', dest);
+
+  this.name = pluralize(this.name);
+
+  dest = this.config.get('endpointDirectory') || 'server/api/' + this.name;
+  this.sourceRoot(path.join(__dirname, './templates/names'));
   ngUtil.processDirectory(this, '.', dest);
 };
